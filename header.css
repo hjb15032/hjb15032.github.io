@@ -1,0 +1,225 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Segoe UI,SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 20px;
+  color: #000000;
+  background-color: white;
+}
+
+p{
+  margin: 50px;
+  font-size: 20px;
+}
+
+.nav-logo > a{
+    color: black;
+    text-decoration: none;
+    display: unset;
+    line-height: unset;
+    margin-left: unset;
+    margin-right: unset;
+    border-top: unset;
+    padding: unset;
+}
+
+.nav-logo > a:hover{
+    border-top: unset;
+}
+
+.nav-logo{
+    margin: 0 auto;
+    padding: 0 20px;
+    float: left;
+    width: 20%;
+}
+
+.nav-logo-link{
+    width: 300px;
+    height: auto;
+    margin-top: 20px;
+    margin-left: 30%;
+}
+
+a{
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+  line-height: 83px;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 16px !important;
+  font-family: "PT Sans", Arial, Helvetica, sans-serif !important;
+}
+
+a:hover, .active
+{
+  font-weight: bold;
+  color: rgb(207,0,0) !important;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  float: right;
+  margin-right: 15%;
+}
+
+.nav {
+  padding: 2px 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  border-top: 2px solid rgb(207,0,0);
+  border-bottom: 2px solid rgb(207,0,0);
+}
+
+.nav-menu {
+  display: flex;
+}
+
+/* Smallest Screen Size */
+@media only screen and (max-width: 450px) {
+    .nav-logo-link{
+        width: 220px !important;
+        height: auto;
+    }
+    .nav-menu{
+      top: 70px !important;
+    }
+    .nav-burger-item {
+      position: relative;
+      transition: all .1s ease;
+      margin-top: 20px !important;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+  .nav-menu {
+    position: fixed;
+    top: 83px;
+    right: 0;
+    background-color: #D3D3D3;
+    flex-direction: column;
+    width: 250px;
+    height: 60%;
+    justify-content: space-evenly;
+    align-items: center;
+    transform: translateX(100%);
+    transition: all .5s ease;
+    border-top: 3px solid rgb(207,0,0);
+  }
+  .container{
+    margin: unset;
+  }
+
+  a{
+    line-height: unset;
+    border-top: unset;
+    margin-top: unset;
+  }
+  
+  a:hover, .active{
+    color: rgb(207,0,0) !important;
+    border-top: unset;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+    .nav-menu.open {
+        transform: translateX(0);
+    }
+    .nav-logo{
+        width: 60%;
+    }
+
+    .nav-logo-link{
+        width: 300px;
+        height: auto;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    .nav-logo-link{
+        margin-left: 2%;
+    }
+    .container{
+        margin-right: unset;
+    }
+}
+
+.nav-menu-link:link, .nav-menu-link:visited {
+  text-decoration: none;
+  color: black;
+  transition: all .4s ease;
+  font-size: 18px;
+}
+
+.nav-burger {
+  display: none;
+}
+
+@media only screen and (max-width: 1000px) {
+  .nav-burger {
+    display: block;
+  }
+}
+
+.nav-burger-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 50px;
+}
+
+.nav-burger-item, .nav-burger-item::after, .nav-burger-item::before {
+  display: block;
+  height: 2px;
+  width: 30px;
+  background-color: black;
+}
+
+.nav-burger-item {
+  position: relative;
+  transition: all .1s ease;
+  margin-top: 30px;
+}
+
+.nav-burger-item::after, .nav-burger-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  transition: all .2s ease;
+}
+
+.nav-burger-item::after {
+  top: 7px;
+}
+
+.nav-burger-item::before {
+  top: -7px;
+}
+
+.closed .nav-burger-item::after, .closed .nav-burger-item::before {
+  top: 0;
+}
+.closed .nav-burger-item {
+  background-color: transparent;
+}
+.closed .nav-burger-item::after {
+  transform: rotate(135deg);
+}
+.closed .nav-burger-item::before {
+  transform: rotate(-135deg);
+}
