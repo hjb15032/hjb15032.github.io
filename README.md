@@ -9,3 +9,7 @@ Gary PPT/Demo
 --- we will cover for each other as needed
 
 Please send Harli your GitHub handle and uga email address or whichever you used for GitHub - Harli is staging the code there
+
+Meetings to be on Tuesdays after class as needed
+
+Outstanding question: when to we need to meet with the client again?
