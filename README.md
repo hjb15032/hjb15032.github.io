@@ -13,3 +13,7 @@ Please send Harli your GitHub handle and uga email address or whichever you used
 Meetings to be on Tuesdays after class as needed
 
 Outstanding question: when to we need to meet with the client again?
+
+other API site suggestions: https://gist.github.com/patpohler/36c731113fd113418c0806f62cbb9e30 and https://www.zillowgroup.com/developers/api/mls-broker-data/mls-listings/
+
+
