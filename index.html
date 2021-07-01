@@ -4,9 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
   <!-- Bootstrap CSS Start-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+
   <!-- Bootstrap CSS Finish-->
 
   <!-- Font Awesome Icons Start  -->
@@ -61,15 +68,43 @@
           <use xlink:href="#bootstrap" /></svg>
         <span class="fs-4">Team ZeroPads Group Assignment</span>
       </a>
+      <nav class="navbar nav-expand-lg navbar-light bg-light">
+        <ul class="nav nav-pills">
+          <li class="nav-item pill-1"><a href="./index.html" class="nav-link active" aria-current="page">Home</a></li>
+          <li class="nav-item pill-1"><a href="./mls.html" class="nav-link">Find Housing</a></li>
+          <!--        <li class="nav-item dropdown pill-1">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+            aria-haspopup="true">About Us</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="./team.html">Our Team</a>
+            <a class="dropdown-item" href="./values.html">Our Values</a>
+            <a class="dropdown-item" href="./whoServe.html">Who We Serve</a>
+            <a class="dropdown-item" href="./jobs.html">Job Openings</a>
+            <a class="dropdown-item" href="./faqs.html">FAQs</a>
+          </div>
+        </li> -->
+          <li class="nav-item dropdown pill-1">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              About Us
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="./team.html">Our Team</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <!-- we need to do a drop down here with things like:  Our Team, Our Values, Who we Serve, Job Openings etc.-->
+          <li class="nav-item pill-1"><a href="./news.html" class="nav-link">News</a></li>
+          <li class="nav-item pill-1"><a href=".contact.html" class="nav-link">Get in Touch</a></li>
+          <li class="nav-item pill-1"><a href="./donate.html" class="nav-link">Donate</a>
 
-      <ul class="nav nav-pills">
-        <li class="nav-item pill-1"><a href="./index.html" class="nav-link active" aria-current="page">Home</a></li>
-        <li class="nav-item pill-1"><a href="./mls.html" class="nav-link">Find Housing</a></li>
-        <li class="nav-item pill-1"><a href="./faqs.html" class="nav-link">About Us</a></li>
-        <!-- we need to do a drop down here with things like:  Our Team, Our Values, Who we Serve, Job Openings etc.-->
-        <li class="nav-item pill-1"><a href="./news.html" class="nav-link">News</a></li>
-        <li class="nav-item pill-1"><a href=".contact.html" class="nav-link">Get in Touch</a></li>
-      </ul>
+        </ul>
+      </nav>
+
     </header>
     <!-- End Header -->
   </div>
