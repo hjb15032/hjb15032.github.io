@@ -1,158 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap CSS Start-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <!-- Bootstrap CSS Finish-->
-    
-    <!-- Font Awesome Icons Start  -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
-    <!-- Font Awesome Icons End  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS Start-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <!-- Bootstrap CSS Finish-->
 
-    <!-- Custom styles for this template -->
-    <link href="./CSS/headers.css" rel="stylesheet">
+  <!-- Font Awesome Icons Start  -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+    integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+  <!-- Font Awesome Icons End  -->
 
-    <!-- Favorites icon -->
-    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+  <!-- Custom styles for this template -->
+  <link href="./CSS/headers.css" rel="stylesheet">
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
+  <!-- Favorites icon -->
+  <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
       }
+    }
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
+    /* Navigation Formatting not active */
+    .nav-pills .pill-1 .nav-link:not(.active) {
+      background-color: #fff;
+      color: black;
+    }
 
-      /* Navigation Formatting not active */
-      .nav-pills .pill-1 .nav-link:not(.active) {
-          background-color: #fff;
-          color: black;
-      }
-
-      /* Navigation Formatting active */
-      .nav-pills .pill-1 .nav-link {
-          background-color: rgba(57, 181, 74, 1);
-          color: white;
-      }
-
-    </style>
-    <title>ZeroPads - Home Page</title>
+    /* Navigation Formatting active */
+    .nav-pills .pill-1 .nav-link {
+      background-color: rgba(57, 181, 74, 1);
+      color: white;
+    }
+  </style>
+  <title>ZeroPads - Home Page</title>
 </head>
+
 <body>
-    <!-- Navigation Bar-->
-    <div class="container">
-        <!-- Header Section-->
-        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-          <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-            <img src="./images/header_logo.png" width="63" height="32">
-            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-            <span class="fs-4">Team ZeroPads Group Assignment</span>
-          </a>
-    
-          <ul class="nav nav-pills">
-            <li class="nav-item pill-1"><a href="./index.html" class="nav-link active" aria-current="page">Home</a></li>
-            <li class="nav-item pill-1"><a href="./mls.html" class="nav-link">MLS Search</a></li>
-            <li class="nav-item pill-1"><a href="./faqs.html" class="nav-link">FAQs</a></li>
-            <li class="nav-item pill-1"><a href="./team.html" class="nav-link">Team</a></li>
-          </ul>
-        </header>
-        <!-- End Header -->
-      </div>
+  <!-- Navigation Bar-->
+  <div class="container">
+    <!-- Header Section-->
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <img src="./images/header_logo.png" width="63" height="32">
+        <svg class="bi me-2" width="40" height="32">
+          <use xlink:href="#bootstrap" /></svg>
+        <span class="fs-4">Team ZeroPads Group Assignment</span>
+      </a>
 
-        <!-- Body Section-->
+      <ul class="nav nav-pills">
+        <li class="nav-item pill-1"><a href="./index.html" class="nav-link active" aria-current="page">Home</a></li>
+        <li class="nav-item pill-1"><a href="./mls.html" class="nav-link">Find Housing</a></li>
+        <li class="nav-item pill-1"><a href="./faqs.html" class="nav-link">About Us</a></li>
+        <!-- we need to do a drop down here with things like:  Our Team, Our Values, Who we Serve, Job Openings etc.-->
+        <li class="nav-item pill-1"><a href="./news.html" class="nav-link">News</a></li>
+        <li class="nav-item pill-1"><a href=".contact.html" class="nav-link">Get in Touch</a></li>
+      </ul>
+    </header>
+    <!-- End Header -->
+  </div>
 
-
-
-        <!-- End Body -->
-    
+  <!-- Body Section-->
 
 
 
-      <!-- Footer Section-->
-      <footer class="text-center text-white fixed-bottom" style="background-color: #f1f1f1;">
-        <!-- Grid container -->
-        <div class="container pt-4">
-          <!-- Section: Social media -->
-          <section class="mb-4">
-            <!-- Facebook -->
-            <a
-              class="btn btn-link btn-floating btn-lg text-dark m-1"
-              href="#!"
-              role="button"
-              data-mdb-ripple-color="dark"
-              ><i class="fab fa-facebook-f"></i
-            ></a>
-      
-            <!-- Twitter -->
-            <a
-              class="btn btn-link btn-floating btn-lg text-dark m-1"
-              href="#!"
-              role="button"
-              data-mdb-ripple-color="dark"
-              ><i class="fab fa-twitter"></i
-            ></a>
-      
-            <!-- Google -->
-            <a
-              class="btn btn-link btn-floating btn-lg text-dark m-1"
-              href="#!"
-              role="button"
-              data-mdb-ripple-color="dark"
-              ><i class="fab fa-google"></i
-            ></a>
-      
-            <!-- Instagram -->
-            <a
-              class="btn btn-link btn-floating btn-lg text-dark m-1"
-              href="#!"
-              role="button"
-              data-mdb-ripple-color="dark"
-              ><i class="fab fa-instagram"></i
-            ></a>
-      
-            <!-- Linkedin -->
-            <a
-              class="btn btn-link btn-floating btn-lg text-dark m-1"
-              href="#!"
-              role="button"
-              data-mdb-ripple-color="dark"
-              ><i class="fab fa-linkedin"></i
-            ></a>
-            <!-- Github -->
-            <a
-              class="btn btn-link btn-floating btn-lg text-dark m-1"
-              href="#!"
-              role="button"
-              data-mdb-ripple-color="dark"
-              ><i class="fab fa-github"></i
-            ></a>
-          </section>
-          <!-- Section: Social media -->
-        </div>
-        <!-- Grid container -->
-      
-        <!-- Copyright -->
-        <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-          © 2021 Copyright:
-          <a class="text-dark" href="https://www.zeropads.org/">ZEROPADS DEVELOPMENT GROUP INC.</a>
-        </div>
-        <!-- Copyright -->
-      </footer>
+  <!-- End Body -->
 
-    
+
+
+
+  <!-- Footer Section-->
+  <footer class="text-center text-white fixed-bottom" style="background-color: #f1f1f1;">
+    <!-- Grid container -->
+    <div class="container pt-4">
+      <!-- Section: Social media -->
+      <section class="mb-4">
+        <!-- Facebook -->
+        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+          data-mdb-ripple-color="dark"><i class="fab fa-facebook-f"></i></a>
+
+        <!-- Twitter -->
+        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+          data-mdb-ripple-color="dark"><i class="fab fa-twitter"></i></a>
+
+        <!-- Google -->
+        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+          data-mdb-ripple-color="dark"><i class="fab fa-google"></i></a>
+
+        <!-- Instagram -->
+        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+          data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
+
+        <!-- Linkedin -->
+        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+          data-mdb-ripple-color="dark"><i class="fab fa-linkedin"></i></a>
+        <!-- Github -->
+        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+          data-mdb-ripple-color="dark"><i class="fab fa-github"></i></a>
+      </section>
+      <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2021 Copyright:
+      <a class="text-dark" href="https://www.zeropads.org/">ZEROPADS DEVELOPMENT GROUP INC.</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+
+
 </body>
 
 <script type="text/javascript">
-    
+
 
 </script>
+
 </html>
