@@ -9,6 +9,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <link href="./CSS/headers.css" rel="stylesheet">
+  <link href="./CSS/main.css" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="./favicon.ico" />
   <title>ZeroPads - MLS Page</title>
 </head>
@@ -47,47 +48,20 @@
   </div>
 
   <!-- Body Section-->
-
-
+  <center>
+  <div class="body">  
+      <br>
+    <h4>Ready to search for listings?</h4>
+    <p>Enter your zip code below to search</p><br>
+    <form class="form-inline my-2 my-lg-0 justify-content-center">
+        <input class="form-control mr-sm-2" type="search" placeholder="Ex: 30114" aria-label="Search" id="zipcode">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+</div>
+</center>
 
   <!-- End Body -->
-
-
-
-
-  <!-- Footer Section-->
-  <footer class="text-center text-white fixed-bottom" style="background-color: #f1f1f1;">
-    <!-- Grid container -->
-    <div class="container pt-4">
-      <!-- Section: Social media -->
-      <section class="mb-4">
-        <!-- Facebook -->
-        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
-          data-mdb-ripple-color="dark"><i class="fab fa-facebook-f"></i></a>
-
-        <!-- Twitter -->
-        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
-          data-mdb-ripple-color="dark"><i class="fab fa-twitter"></i></a>
-
-        <!-- Google -->
-        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
-          data-mdb-ripple-color="dark"><i class="fab fa-google"></i></a>
-
-        <!-- Instagram -->
-        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
-          data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
-
-        <!-- Linkedin -->
-        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
-          data-mdb-ripple-color="dark"><i class="fab fa-linkedin"></i></a>
-        <!-- Github -->
-        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
-          data-mdb-ripple-color="dark"><i class="fab fa-github"></i></a>
-      </section>
-      <!-- Section: Social media -->
-    </div>
-    <!-- Grid container -->
-
+    <footer>
     <!-- Copyright -->
     <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
       © 2021 Copyright:
@@ -100,6 +74,7 @@
 </body>
 
 <script type="text/javascript">
+var zipcode = document.getElementById("zipcode");
 
 
 </script>
