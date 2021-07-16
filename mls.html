@@ -52,10 +52,13 @@
   <div class="body">  
       <br>
     <h4>Ready to search for listings?</h4>
-    <p>Enter your zip code below to search</p><br>
+    <p>Enter your city and state abreviation below to search</p><br>
     <form class="form-inline my-2 my-lg-0 justify-content-center">
-        <input class="form-control mr-sm-2" type="search" placeholder="Ex: 30114" aria-label="Search" id="zipcode">
-        <button class="btn btn-outline-success my-2 my-sm-0" id="search" value="search" type="button" onclick="supSelection">Search</button>
+        <label>City: </label>
+        <input class="form-control mr-sm-2" type="search" placeholder="Ex: Canton" aria-label="Search" id="city">
+        <label>State (Abreviated): </label>
+        <input class="form-control mr-sm-2" type="search" placeholder="Ex: GA" aria-label="Search" id="state">
+        <button class="btn btn-outline-success my-2 my-sm-0" id="search" value="search" type="button" onclick="findHome">Search</button>
       </form>
 </div>
 </center>
@@ -74,13 +77,21 @@
 </body>
 
 <script type="text/javascript">
-    document.getElementById("search").addEventListener("click", supSelection);
-    
+
+    document.getElementById("search").addEventListener("click", findHome);
     var searchResultStats = {};
 
-    function supSelection(e){
+    function findHome(e){
+   
+      var city = document.getElementById("city").value;
+      var state = document.getElementById("state").value;  
+
+      if(state.length !== 2){
+        errorHandle(1);
+        return;
+      }
         
-      const url = 'https://us-real-estate.p.rapidapi.com/location/for-sale-nearby-areas-by-postal-code?postal_code='+30114;
+      const url = 'https://us-real-estate.p.rapidapi.com/for-sale?offset=0&limit=10&state_code='+state+'&city='+city+'&sort=newest';
       console.log(url);
       fetch(url, {
             "method": "GET",
@@ -92,14 +103,18 @@
       .then(function(response) {
           return response.json();
       }).then(function(data) {
-          console.log(data);
-          searchResultStats = data.city;
-          console.log(searchResultStats);
+
+        console.log(data)
       })
       .catch(err => {
           console.log(err);
       });
     }
 
+function errorHandle(err){
+  if(err == 1){
+    alert("We're sorry, your results could not be calculated. Please make sure you enter a valid city/state combination.")
+  }
+}
 </script>
 </html>
