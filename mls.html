@@ -79,7 +79,6 @@
 <script type="text/javascript">
 
     document.getElementById("search").addEventListener("click", findHome);
-    var searchResultStats = [];
 
     function findHome(e){
       var city = document.getElementById("city").value;
@@ -114,6 +113,7 @@
     }
 
 function parseData(data){
+  var searchResultStats = [];
   var length = data.data.count;
   if(data.data.results === null ){
     errorHandle(2);
