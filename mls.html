@@ -8,8 +8,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href="./CSS/headers.css" rel="stylesheet">
-  <link href="./CSS/main.css" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="./favicon.ico" />
   <title>ZeroPads - MLS Page</title>
 </head>
@@ -55,7 +55,7 @@
     <p>Enter your zip code below to search</p><br>
     <form class="form-inline my-2 my-lg-0 justify-content-center">
         <input class="form-control mr-sm-2" type="search" placeholder="Ex: 30114" aria-label="Search" id="zipcode">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" id="search" value="search" type="button" onclick="supSelection">Search</button>
       </form>
 </div>
 </center>
@@ -74,9 +74,32 @@
 </body>
 
 <script type="text/javascript">
-var zipcode = document.getElementById("zipcode");
+    document.getElementById("search").addEventListener("click", supSelection);
+    
+    var searchResultStats = {};
 
+    function supSelection(e){
+        
+      const url = 'https://us-real-estate.p.rapidapi.com/location/for-sale-nearby-areas-by-postal-code?postal_code='+30114;
+      console.log(url);
+      fetch(url, {
+            "method": "GET",
+            "headers": {
+          "x-rapidapi-host": "us-real-estate.p.rapidapi.com",
+          "x-rapidapi-key": "218ebec704mshd75e7df5031dbe6p133a54jsn81b575145120"
+            }
+          })
+      .then(function(response) {
+          return response.json();
+      }).then(function(data) {
+          console.log(data);
+          searchResultStats = data.city;
+          console.log(searchResultStats);
+      })
+      .catch(err => {
+          console.log(err);
+      });
+    }
 
 </script>
-
 </html>
