@@ -79,15 +79,14 @@
 <script type="text/javascript">
 
     document.getElementById("search").addEventListener("click", findHome);
-    var searchResultStats = {};
+    var searchResultStats = [];
 
     function findHome(e){
-   
       var city = document.getElementById("city").value;
       var state = document.getElementById("state").value;  
 
       if(state.length !== 2){
-        errorHandle(1);
+        errorHandle(2);
         return;
       }
         
@@ -101,19 +100,65 @@
             }
           })
       .then(function(response) {
-          return response.json();
+        if(response.status !== 200){
+          errorHandle(1);
+          return;
+        }
+        return response.json();
       }).then(function(data) {
-
-        console.log(data)
+        parseData(data);
       })
       .catch(err => {
           console.log(err);
       });
     }
 
+function parseData(data){
+  var length = data.data.count;
+  if(data.data.results === null ){
+    errorHandle(2);
+    return;
+  }else{
+    for(i=0; i<length; i++){
+      var address = data.data.results[i].location.address;
+      var photos = data.data.results[i].primary_photo.href;
+      var listingPrice = data.data.results[i].list_price;
+      var listingDate = data.data.results[i].list_date;
+      var numBed =  data.data.results[i].description.beds;
+      var numBath = data.data.results[i].description.baths;
+      var sqFoot = data.data.results[i].description.sqft;
+      var type = data.data.results[i].description.type;
+      var yearBuilt = data.data.results[i].description.year_built;
+      var listingAgent = data.data.results[i].branding[0].name;
+
+      var singleStats = {
+        address: address,
+        photos: photos, 
+        listingPrice: listingPrice,
+        numBed: numBed,
+        numBath: numBath, 
+        sqFoot: sqFoot,
+        type: type,
+        yearBuilt: yearBuilt,
+        listingAgent: listingAgent
+      };
+      // gathering 10 of the results and putting them all into an array
+      searchResultStats.push(JSON.stringify(singleStats));
+    }
+
+    // printing out array to the console
+    for(i=0; i<length; i++){
+      console.log(searchResultStats[i]);
+    }
+    console.log(data.data.results[0]);
+  }// for
+}
+
 function errorHandle(err){
   if(err == 1){
     alert("We're sorry, your results could not be calculated. Please make sure you enter a valid city/state combination.")
+  }if (err == 2){
+    alert("We're sorry, your results could not be calculated. Please make sure you enter a valid city/state combination. In some cases, we may not have any homes available in the city/state you provided")
   }
 }
 </script>
