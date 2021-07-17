@@ -136,16 +136,20 @@
               </div>
 
             </div>
-            <div id="cardsArea">
 
-            </div>
+
           </div>
-
-
         </div>
-      </div>
 
+
+      </div>
     </div>
+
+
+    <div id="cardsArea">
+    </div>
+  </div>
+
   </div>
   <br />
 
@@ -264,34 +268,57 @@
 
       }
       console.log(data.data.results[0]);
-      console.log("Third item in array place : " +
-        searchResultStats[2]);
-      console.log("Third item in array place attempt value : " + (searchResultStats[2].type).value);
 
+      //Functionality to send array data to HTML
       thelisthtml = "";
       document.getElementById("cardsArea").innerHTML = "";
+
+      thelisthtml += "<div class='row'> ";
+
+
       for (i = 0; i < length; i++) {
-        thelisthtml += "Listing Price : " + searchResultStats.listingPrice + "<br />"
+        thelisthtml += "<div class='col-lg-3 col-md-4 col-xs-6'>"
+        thelisthtml += "<div class='card' style='width: 22rem;'>"
+        thelisthtml += "<img src=" + JSON.parse(searchResultStats[i]).photos +
+          " class='card - img - top img-rounded' alt='photo of listing'>"
+        thelisthtml += " <div class='card-body'>";
+        thelisthtml += "<h5 class='card-title'>" + "Listing Price : $" + JSON.parse(searchResultStats[i]).listingPrice +
+          "</h5>";
+        thelisthtml += "<h6 class='card-subtitle mb-2 text-muted'>" + "Listing Agent : " +
+          JSON.parse(searchResultStats[i]).listingAgent +
+          "</h6>";
+
+        thelisthtml += "<p class='card-text'>" + +JSON.parse(searchResultStats[i]).address +
+          "</p></div>" //end of card body
+        thelisthtml += "<ul class='list-group list-group-flush'>"
+        thelisthtml += "<li class='list-group-item'>" + "Number of Beds: " + JSON.parse(searchResultStats[i]).numBed +
+          "</li>"
+        thelisthtml += "<li class='list-group-item'>" + "Number of Baths: " + JSON.parse(searchResultStats[i]).numBath +
+          "</li>"
+        thelisthtml += "<li class='list-group-item'>" + "Square Footage " +
+          JSON.parse(searchResultStats[i]).sqFoot + "</li>"
+        thelisthtml += "<li class='list-group-item'>" + "Year Built " +
+          JSON.parse(searchResultStats[i]).yearBuilt + "</li>"
+        thelisthtml += "<li class='list-group-item'>" + "Type " +
+          JSON.parse(searchResultStats[i]).type + "</li></ul>"
+        thelisthtml += " <div class='card-body'>";
+        thelisthtml += " <button class='btn btn-success' id='searchProp' value='See More' type='button'> " +
+          "See More" +
+          "</button>";
+
+        thelisthtml
+          += "</div></div></div>";
         document.getElementById("cardsArea").innerHTML = thelisthtml;
-
       }
-      // This will eventually be the code for diplaying the results on the cards-
+      thelisthtml += "</div>";
 
-      /* thelisthtml += "<div class='col-md-3'><div class='card' style='width:18rem;' ";
-      thelisthtml
-        += "<div class='card-body'>";
-      thelisthtml += "<h5 class='card-title'>" + searchResultStats[i].list_price +
-        "</h5>";
-      thelisthtml += "<p class='card-text'>" + searchResultStats[i].address + "</p>";
-      thelisthtml
-        += "</div></div></div>"; */
+
+      //<img src="https://i.imgur.com/ZTkt4I5.jpg" class="card-img-top" alt="...">
+
     }
 
 
-  } // for
-
-
-
+  }
 
 
   function errorHandle(err) {
