@@ -260,26 +260,36 @@
 
       // printing out array to the console
       for (i = 0; i < length; i++) {
-        console.log(searchResultStats[i]);
+        console.log("Result set 1" + searchResultStats[i]);
+
       }
       console.log(data.data.results[0]);
-    } // for
-    showData();
-  }
+      console.log("Third item in array place : " +
+        searchResultStats[2]);
+      console.log("Third item in array place attempt value : " + (searchResultStats[2].type).value);
 
-  function showData(searchResultStats, data) {
+      thelisthtml = "";
+      document.getElementById("cardsArea").innerHTML = "";
+      for (i = 0; i < length; i++) {
+        thelisthtml += "Listing Price : " + searchResultStats.listingPrice + "<br />"
+        document.getElementById("cardsArea").innerHTML = thelisthtml;
 
-    thelisthtml = "";
+      }
+      // This will eventually be the code for diplaying the results on the cards-
 
-    for (i = 0; i < searchResultStats.length; i++) {
-      thelisthtml += "<div class='card' style='width:18rem;' ";
-      thelisthtml += "<div class='card-body'>";
-      thelisthtml += "<h5 class='card-title'>" + searchResultStats[i].listingPrice + "</h5>";
+      /* thelisthtml += "<div class='col-md-3'><div class='card' style='width:18rem;' ";
+      thelisthtml
+        += "<div class='card-body'>";
+      thelisthtml += "<h5 class='card-title'>" + searchResultStats[i].list_price +
+        "</h5>";
       thelisthtml += "<p class='card-text'>" + searchResultStats[i].address + "</p>";
-      thelisthtml += "</div></div>";
+      thelisthtml
+        += "</div></div></div>"; */
     }
-    document.getElementById("cardsArea").innerHTML = thelisthtml;
-  }
+
+
+  } // for
+
 
 
 
