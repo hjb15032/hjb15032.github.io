@@ -139,7 +139,7 @@
     </div>
     <div id="cardsArea"></div>
   </div>
-</div>
+  </div>
   <br />
 
 
@@ -189,7 +189,7 @@
     var state = document.getElementById("state").value;
     var searchButton = document.getElementById("search");
     searchButton.disabled = true;
-    searchButton.innerText="Please Wait...";
+    searchButton.innerText = "Please Wait...";
 
     if (state.length !== 2) {
       errorHandle(2);
@@ -215,8 +215,8 @@
       }).then(function (data) {
         parseData(data);
       }).then(function () {
-        searchButton.disabled = false; 
-        searchButton.innerText="Search";
+        searchButton.disabled = false;
+        searchButton.innerText = "Search";
       })
       .catch(err => {
         console.log(err);
@@ -272,20 +272,21 @@
       thelisthtml = "";
       document.getElementById("cardsArea").innerHTML = "";
       thelisthtml += "<div class='row'> ";
-
+      thelisthtml += "<h2>" + "Showing results for " + city + ", " + state + "</h2>";
       for (i = 0; i < length; i++) {
         thelisthtml += "<div class='col-lg-3 col-md-4 col-xs-6'>"
-        thelisthtml += "<div class='card' style='width: 22rem;'>"
+        thelisthtml += "<div class='card bg-light' style='width: 18rem;'>"
         thelisthtml += "<img src=" + JSON.parse(searchResultStats[i]).photos +
-          " class='card - img - top img-rounded' alt='photo of listing'>"
+          " class='card - img - top img-rounded' style='height: 190px' alt='photo of listing'>"
         thelisthtml += " <div class='card-body'>";
         thelisthtml += "<h5 class='card-title'>" + "Listing Price: $" + JSON.parse(searchResultStats[i]).listingPrice +
           "</h5>";
         thelisthtml += "<h6 class='card-subtitle mb-2 text-muted'>" + "Listing Agent: " +
           JSON.parse(searchResultStats[i]).listingAgent +
           "</h6>";
-        thelisthtml += "<p class='card-text'>" + JSON.parse(searchResultStats[i]).street + " " + "<br>" + JSON.parse(searchResultStats[i]).city + ", " +
-          JSON.parse(searchResultStats[i]).state +  " " + JSON.parse(searchResultStats[i]).postalCode +
+        thelisthtml += "<p class='card-text'>" + JSON.parse(searchResultStats[i]).street + " " + "<br>" + JSON.parse(
+            searchResultStats[i]).city + ", " +
+          JSON.parse(searchResultStats[i]).state + " " + JSON.parse(searchResultStats[i]).postalCode +
           "</p></div>" //end of card body
         thelisthtml += "<ul class='list-group list-group-flush'>"
         thelisthtml += "<li class='list-group-item'>" + "Number of Beds: " + JSON.parse(searchResultStats[i]).numBed +
@@ -293,14 +294,14 @@
         thelisthtml += "<li class='list-group-item'>" + "Number of Baths: " + JSON.parse(searchResultStats[i]).numBath +
           "</li>"
         thelisthtml += "<li class='list-group-item'>" + "Square Feet: " +
-          JSON.parse(searchResultStats[i]).sqFoot + "</li>"
+          JSON.parse(searchResultStats[i]).sqFoot + "sqft" + "</li>"
         thelisthtml += "<li class='list-group-item'>" + "Year Built: " +
           JSON.parse(searchResultStats[i]).yearBuilt + "</li>"
         thelisthtml += "<li class='list-group-item'>" + "Type: " +
           JSON.parse(searchResultStats[i]).type + "</li></ul>"
         thelisthtml += " <div class='card-body'>";
         thelisthtml += " <button class='btn btn-success' id='searchProp' value='See More' type='button'> " +
-          "See More" +
+          "See More (in development)" +
           "</button>";
 
         thelisthtml
