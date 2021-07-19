@@ -330,6 +330,12 @@
 
 
   function errorHandle(err) {
+    var searchButton = document.getElementById("search");
+    searchButton.disabled = false;
+    searchButton.innerText = "Search";
+
+    document.getElementById("cardsArea").innerHTML = " ";
+
     if (err == 1) {
       alert(
         "We're sorry, your results could not be calculated. Please make sure you enter a valid city/state combination.")
