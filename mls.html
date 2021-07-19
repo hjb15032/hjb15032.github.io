@@ -226,6 +226,7 @@
   function parseData(data) {
     var searchResultStats = [];
     var length = data.data.count;
+
     if (data.data.results === null) {
       errorHandle(2);
       return;
@@ -235,13 +236,25 @@
         var state = data.data.results[i].location.address.state;
         var city = data.data.results[i].location.address.city;
         var street = data.data.results[i].location.address.line;
-        var photos = data.data.results[i].primary_photo.href;
+        var photos
+        if (data.data.results[i].primary_photo === null) {
+          photos = "images/house.jpg"
+        } else {
+          photos = data.data.results[i].primary_photo.href;
+        }
         var listingPrice = data.data.results[i].list_price;
         var listingDate = data.data.results[i].list_date;
-        var numBed = data.data.results[i].description.beds;
+        var numBed
+        if (data.data.results[i].description === null) {
+          numBed = "N.A"
+        } else {
+          numBed = data.data.results[i].description.beds;
+        }
         var numBath = data.data.results[i].description.baths;
         var sqFoot = data.data.results[i].description.sqft;
         var type = data.data.results[i].description.type;
+        type = type.replace("_", " ");
+        type = type.toUpperCase();
         var yearBuilt = data.data.results[i].description.year_built;
         var listingAgent = data.data.results[i].branding[0].name;
 
@@ -261,7 +274,9 @@
         };
         // gathering 10 of the results and putting them all into an array
         searchResultStats.push(JSON.stringify(singleStats));
+
       }
+
 
       // printing out array to the console
       for (i = 0; i < length; i++) {
@@ -277,13 +292,10 @@
         thelisthtml += "<div class='col-lg-3 col-md-4 col-xs-6'>"
         thelisthtml += "<div class='card bg-light' style='width: 18rem;'>"
         thelisthtml += "<img src=" + JSON.parse(searchResultStats[i]).photos +
-          " class='card - img - top img-rounded' style='height: 190px' alt='photo of listing'>"
+          " class='card - img - top img-rounded' style='height: 210px' alt='photo of listing'>"
         thelisthtml += " <div class='card-body'>";
         thelisthtml += "<h5 class='card-title'>" + "Listing Price: $" + JSON.parse(searchResultStats[i]).listingPrice +
           "</h5>";
-        thelisthtml += "<h6 class='card-subtitle mb-2 text-muted'>" + "Listing Agent: " +
-          JSON.parse(searchResultStats[i]).listingAgent +
-          "</h6>";
         thelisthtml += "<p class='card-text'>" + JSON.parse(searchResultStats[i]).street + " " + "<br>" + JSON.parse(
             searchResultStats[i]).city + ", " +
           JSON.parse(searchResultStats[i]).state + " " + JSON.parse(searchResultStats[i]).postalCode +
@@ -294,12 +306,13 @@
         thelisthtml += "<li class='list-group-item'>" + "Number of Baths: " + JSON.parse(searchResultStats[i]).numBath +
           "</li>"
         thelisthtml += "<li class='list-group-item'>" + "Square Feet: " +
-          JSON.parse(searchResultStats[i]).sqFoot + "sqft" + "</li>"
+          JSON.parse(searchResultStats[i]).sqFoot + " sqft" + "</li>"
         thelisthtml += "<li class='list-group-item'>" + "Year Built: " +
           JSON.parse(searchResultStats[i]).yearBuilt + "</li>"
         thelisthtml += "<li class='list-group-item'>" + "Type: " +
           JSON.parse(searchResultStats[i]).type + "</li></ul>"
         thelisthtml += " <div class='card-body'>";
+        thelisthtml += "<p class='card-text'>" + JSON.parse(searchResultStats[i]).listingAgent + "</p></div>"
         thelisthtml += " <button class='btn btn-success' id='searchProp' value='See More' type='button'> " +
           "See More (in development)" +
           "</button>";
