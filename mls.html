@@ -14,6 +14,7 @@
   </script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   <link href="./CSS/headers.css" rel="stylesheet">
+  <link href="./CSS/mls.css" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="./favicon.ico" />
   <title>ZeroPads - MLS Page</title>
 </head>
@@ -143,42 +144,25 @@
   <br />
 
 
-  <!-- Footer -->
   <footer class="bg-light text-center text-white">
     <!-- Grid container -->
     <div class="container p-4 pb-0">
       <!-- Section: Social media -->
       <section class="mb-4">
-        <!-- Facebook -->
-        <a class="btn btn-primary btn-floating m-1" style="background-color: #39b54a;" href="#!" role="button"><i
-            class="bi bi-facebook"></i></a>
-
-        <!-- Twitter -->
-        <a class="btn btn-primary btn-floating m-1" style="background-color: #39b54a;" href="#!" role="button"><i
-            class="bi bi-twitter"></i></a>
-
         <!-- Google -->
-        <a class="btn btn-primary btn-floating m-1" style="background-color: #39b54a;" href="#!" role="button"><i
+        <a class="btn btn-primary btn-floating m-1" style="background-color: #39b54a;" href="https://www.google.com/search?client=firefox-b-1-d&q=ZeroPads+Development+group" target="_blank" role="button"><i
             class="bi bi-google"></i></a>
 
         <!-- Instagram -->
-        <a class="btn btn-primary btn-floating m-1" style="background-color: #39b54a;" href="#!" role="button"><i
+        <a class="btn btn-primary btn-floating m-1" style="background-color: #39b54a;" href="https://www.instagram.com/zeropads/" target="_blank" role="button"><i
             class="bi bi-instagram"></i></a>
-
-        <!-- Linkedin -->
-        <a class="btn btn-primary btn-floating m-1" style="background-color: #39b54a;" href="#!" role="button"><i
-            class="bi bi-linkedin"></i></a>
-        <!-- Github -->
-
       </section>
       <!-- Section: Social media -->
     </div>
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
       ZeroPads Development Group
     </div>
-
   </footer>
-
 </body>
 
 <script type="text/javascript">
@@ -209,6 +193,8 @@
       .then(function (response) {
         if (response.status !== 200) {
           errorHandle(1);
+          searchButton.disabled = false;
+          searchButton.innerText = "Search";
           return;
         }
         return response.json();
@@ -220,42 +206,64 @@
       })
       .catch(err => {
         console.log(err);
+        searchButton.disabled = false;
+        searchButton.innerText = "Search";
       });
   }
 
   function parseData(data) {
     var searchResultStats = [];
     var length = data.data.count;
-
+    if(data.date === null){
+      errorHandle(2);
+      return;
+    }
     if (data.data.results === null) {
       errorHandle(2);
       return;
     } else {
       for (i = 0; i < length; i++) {
         var postalCode = data.data.results[i].location.address.postal_code;
-        var state = data.data.results[i].location.address.state;
+        var state = data.data.results[i].location.address.state_code; // need state code (abrev) instead of state non abrev for error checking 
         var city = data.data.results[i].location.address.city;
         var street = data.data.results[i].location.address.line;
-        var photos
+        var listingPrice = data.data.results[i].list_price;
+        var listingDate = data.data.results[i].list_date;
+        var photos;
+        var numBed = data.data.results[i].description.beds;
+        var numBath = data.data.results[i].description.baths;
+        var sqFoot = data.data.results[i].description.sqft;
+        var yearBuilt = data.data.results[i].description.year_built;
+        
+        if(state !== document.getElementById("state").value){
+          errorHandle(2);
+          return;
+        }
+        if(city !== document.getElementById("city").value){
+          errorHandle(2);
+          return;
+        }
         if (data.data.results[i].primary_photo === null) {
-          photos = "images/house.jpg"
+          photos = "images/house.jpg";
         } else {
           photos = data.data.results[i].primary_photo.href;
         }
-        var listingPrice = data.data.results[i].list_price;
-        var listingDate = data.data.results[i].list_date;
-        var numBed
-        if (data.data.results[i].description === null) {
-          numBed = "N.A"
-        } else {
-          numBed = data.data.results[i].description.beds;
+        if (numBed === null) {
+          numBed = "N.A";
         }
-        var numBath = data.data.results[i].description.baths;
-        var sqFoot = data.data.results[i].description.sqft;
+        if(numBath === null){
+          numBath = "N.A";
+        }
+        if(yearBuilt === null){
+          yearBuilt = "N.A";
+        }
+        if(sqFoot === null){
+          sqFoot = "N.A";
+        }
+
         var type = data.data.results[i].description.type;
         type = type.replace("_", " ");
         type = type.toUpperCase();
-        var yearBuilt = data.data.results[i].description.year_built;
         var listingAgent = data.data.results[i].branding[0].name;
 
         var singleStats = {
@@ -270,19 +278,12 @@
           sqFoot: sqFoot,
           type: type,
           yearBuilt: yearBuilt,
-          listingAgent: listingAgent
+          listingAgent: listingAgent,
         };
         // gathering 10 of the results and putting them all into an array
         searchResultStats.push(JSON.stringify(singleStats));
 
       }
-
-
-      // printing out array to the console
-      for (i = 0; i < length; i++) {
-        console.log("Result Set" + searchResultStats[i]);
-      }
-
       //Functionality to send array data to HTML
       thelisthtml = "";
       document.getElementById("cardsArea").innerHTML = "";
@@ -294,8 +295,8 @@
         thelisthtml += "<img src=" + JSON.parse(searchResultStats[i]).photos +
           " class='card - img - top img-rounded' style='height: 210px' alt='photo of listing'>"
         thelisthtml += " <div class='card-body'>";
-        thelisthtml += "<h5 class='card-title'>" + "Listing Price: $" + JSON.parse(searchResultStats[i]).listingPrice +
-          "</h5>";
+        thelisthtml += "<h5 class='card-title'>" + "Listing Price: <strong style='color:rgba(57, 181, 74, 1)'>$" + (JSON.parse(searchResultStats[i]).listingPrice).toLocaleString()+
+          "</strong></h5>";
         thelisthtml += "<p class='card-text'>" + JSON.parse(searchResultStats[i]).street + " " + "<br>" + JSON.parse(
             searchResultStats[i]).city + ", " +
           JSON.parse(searchResultStats[i]).state + " " + JSON.parse(searchResultStats[i]).postalCode +
@@ -306,17 +307,13 @@
         thelisthtml += "<li class='list-group-item'>" + "Number of Baths: " + JSON.parse(searchResultStats[i]).numBath +
           "</li>"
         thelisthtml += "<li class='list-group-item'>" + "Square Feet: " +
-          JSON.parse(searchResultStats[i]).sqFoot + " sqft" + "</li>"
+          JSON.parse(searchResultStats[i]).sqFoot + "</li>"
         thelisthtml += "<li class='list-group-item'>" + "Year Built: " +
           JSON.parse(searchResultStats[i]).yearBuilt + "</li>"
         thelisthtml += "<li class='list-group-item'>" + "Type: " +
           JSON.parse(searchResultStats[i]).type + "</li></ul>"
-        thelisthtml += " <div class='card-body'>";
-        thelisthtml += "<p class='card-text'>" + JSON.parse(searchResultStats[i]).listingAgent + "</p></div>"
-        thelisthtml += " <button class='btn btn-success' id='searchProp' value='See More' type='button'> " +
-          "See More (in development)" +
-          "</button>";
-
+        thelisthtml += " <div class='card-body' style='background-color: rgba(57, 181, 74, 1)'>";
+        thelisthtml += "<p class='card-text' style='color: white'>" + JSON.parse(searchResultStats[i]).listingAgent + "</p></div>"
         thelisthtml
           += "</div></div></div>";
         document.getElementById("cardsArea").innerHTML = thelisthtml;
@@ -335,13 +332,14 @@
   function errorHandle(err) {
     if (err == 1) {
       alert(
-        "We're sorry, your results could not be calculated. Please make sure you enter a valid city/state combination."
-      )
+        "We're sorry, your results could not be calculated. Please make sure you enter a valid city/state combination.")
+        document.getElementById("cardsArea").innerHTML = " ";
     }
     if (err == 2) {
       alert(
         "We're sorry, your results could not be calculated. Please make sure you enter a valid city/state combination. In some cases, we may not have any homes available in the city/state you provided"
       )
+      document.getElementById("cardsArea").innerHTML = " ";
     }
   }
 </script>
