@@ -234,6 +234,7 @@
         var numBath = data.data.results[i].description.baths;
         var sqFoot = data.data.results[i].description.sqft;
         var yearBuilt = data.data.results[i].description.year_built;
+        var stateNoAbrev = data.data.results[i].location.address.state;
         
         if(state !== document.getElementById("state").value){
           errorHandle(2);
@@ -279,6 +280,7 @@
           type: type,
           yearBuilt: yearBuilt,
           listingAgent: listingAgent,
+          stateNoAbrev: stateNoAbrev,
         };
         // gathering 10 of the results and putting them all into an array
         searchResultStats.push(JSON.stringify(singleStats));
@@ -288,7 +290,7 @@
       thelisthtml = "";
       document.getElementById("cardsArea").innerHTML = "";
       thelisthtml += "<div class='row'> ";
-      thelisthtml += "<h2>" + "Showing results for " + city + ", " + state + "</h2>";
+      thelisthtml += "<h2>" + "Showing results for " + city + ", " + stateNoAbrev + "</h2>";
       for (i = 0; i < length; i++) {
         thelisthtml += "<div class='col-lg-3 col-md-4 col-xs-6'>"
         thelisthtml += "<div class='card bg-light' style='width: 18rem;'>"
