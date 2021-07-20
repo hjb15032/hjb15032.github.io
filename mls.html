@@ -138,10 +138,13 @@
         </div>
       </div>
     </div>
-    <div id="cardsArea"></div>
+    <div class="container">
+      <div class="row">
+        <div id="cardsArea"></div>
+      </div>
+    </div>
   </div>
-  </div>
-  <br />
+
 
 
   <footer class="bg-light text-center text-white">
@@ -150,12 +153,13 @@
       <!-- Section: Social media -->
       <section class="mb-4">
         <!-- Google -->
-        <a class="btn btn-primary btn-floating m-1" style="background-color: #39b54a;" href="https://www.google.com/search?client=firefox-b-1-d&q=ZeroPads+Development+group" target="_blank" role="button"><i
-            class="bi bi-google"></i></a>
+        <a class="btn btn-primary btn-floating m-1" style="background-color: #39b54a;"
+          href="https://www.google.com/search?client=firefox-b-1-d&q=ZeroPads+Development+group" target="_blank"
+          role="button"><i class="bi bi-google"></i></a>
 
         <!-- Instagram -->
-        <a class="btn btn-primary btn-floating m-1" style="background-color: #39b54a;" href="https://www.instagram.com/zeropads/" target="_blank" role="button"><i
-            class="bi bi-instagram"></i></a>
+        <a class="btn btn-primary btn-floating m-1" style="background-color: #39b54a;"
+          href="https://www.instagram.com/zeropads/" target="_blank" role="button"><i class="bi bi-instagram"></i></a>
       </section>
       <!-- Section: Social media -->
     </div>
@@ -214,7 +218,7 @@
   function parseData(data) {
     var searchResultStats = [];
     var length = data.data.count;
-    if(data.date === null){
+    if (data.date === null) {
       errorHandle(2);
       return;
     }
@@ -224,7 +228,8 @@
     } else {
       for (i = 0; i < length; i++) {
         var postalCode = data.data.results[i].location.address.postal_code;
-        var state = data.data.results[i].location.address.state_code; // need state code (abrev) instead of state non abrev for error checking 
+        var state = data.data.results[i].location.address
+          .state_code; // need state code (abrev) instead of state non abrev for error checking 
         var city = data.data.results[i].location.address.city;
         var street = data.data.results[i].location.address.line;
         var listingPrice = data.data.results[i].list_price;
@@ -235,12 +240,12 @@
         var sqFoot = data.data.results[i].description.sqft;
         var yearBuilt = data.data.results[i].description.year_built;
         var stateNoAbrev = data.data.results[i].location.address.state;
-        
-        if(state !== document.getElementById("state").value){
+
+        if (state !== document.getElementById("state").value) {
           errorHandle(2);
           return;
         }
-        if(city !== document.getElementById("city").value){
+        if (city !== document.getElementById("city").value) {
           errorHandle(2);
           return;
         }
@@ -252,13 +257,13 @@
         if (numBed === null) {
           numBed = "N.A";
         }
-        if(numBath === null){
+        if (numBath === null) {
           numBath = "N.A";
         }
-        if(yearBuilt === null){
+        if (yearBuilt === null) {
           yearBuilt = "N.A";
         }
-        if(sqFoot === null){
+        if (sqFoot === null) {
           sqFoot = "N.A";
         }
 
@@ -289,15 +294,16 @@
       //Functionality to send array data to HTML
       thelisthtml = "";
       document.getElementById("cardsArea").innerHTML = "";
-      thelisthtml += "<div class='row'> ";
       thelisthtml += "<h2>" + "Showing results for " + city + ", " + stateNoAbrev + "</h2>";
+
       for (i = 0; i < length; i++) {
-        thelisthtml += "<div class='col-lg-3 col-md-4 col-xs-6'>"
+        thelisthtml += "<div class='col-md-2'>"
         thelisthtml += "<div class='card bg-light' style='width: 18rem;'>"
         thelisthtml += "<img src=" + JSON.parse(searchResultStats[i]).photos +
           " class='card - img - top img-rounded' style='height: 210px' alt='photo of listing'>"
         thelisthtml += " <div class='card-body'>";
-        thelisthtml += "<h5 class='card-title'>" + "Listing Price: <strong style='color:rgba(57, 181, 74, 1)'>$" + (JSON.parse(searchResultStats[i]).listingPrice).toLocaleString()+
+        thelisthtml += "<h5 class='card-title'>" + "Listing Price: <strong style='color:rgba(57, 181, 74, 1)'>$" + (JSON
+            .parse(searchResultStats[i]).listingPrice).toLocaleString() +
           "</strong></h5>";
         thelisthtml += "<p class='card-text'>" + JSON.parse(searchResultStats[i]).street + " " + "<br>" + JSON.parse(
             searchResultStats[i]).city + ", " +
@@ -315,12 +321,14 @@
         thelisthtml += "<li class='list-group-item'>" + "Type: " +
           JSON.parse(searchResultStats[i]).type + "</li></ul>"
         thelisthtml += " <div class='card-body' style='background-color: rgba(57, 181, 74, 1)'>";
-        thelisthtml += "<p class='card-text' style='color: white'>" + JSON.parse(searchResultStats[i]).listingAgent + "</p></div>"
+        thelisthtml += "<p class='card-text' style='color: white'>" + JSON.parse(searchResultStats[i]).listingAgent +
+          "</p></div>"
         thelisthtml
-          += "</div></div></div>";
+          += "</div></div>";
         document.getElementById("cardsArea").innerHTML = thelisthtml;
+
       }
-      thelisthtml += "</div>";
+
 
 
       //<img src="https://i.imgur.com/ZTkt4I5.jpg" class="card-img-top" alt="...">
@@ -340,8 +348,9 @@
 
     if (err == 1) {
       alert(
-        "We're sorry, your results could not be calculated. Please make sure you enter a valid city/state combination.")
-        document.getElementById("cardsArea").innerHTML = " ";
+        "We're sorry, your results could not be calculated. Please make sure you enter a valid city/state combination."
+      )
+      document.getElementById("cardsArea").innerHTML = " ";
     }
     if (err == 2) {
       alert(
