@@ -64,7 +64,7 @@
             <div class="p-5 mb-4 bg-light rounded-3">
               <div class="container-fluid py-5">
                 <h4>Ready to search for listings?</h4>
-                <p>Enter your city and state below to search for current listings for sale.</p><br>
+                <p>Enter your city and state below to search for current listings for sale around that area.</p><br>
                 <form>
                   <div class="mb-3 ">
                     <label>City: </label>
@@ -173,8 +173,9 @@
   document.getElementById("search").addEventListener("click", findHome);
 
   function findHome(e) {
-    var city = document.getElementById("city").value;
+    var cityWithSpace = document.getElementById("city").value;
     var state = document.getElementById("state").value;
+    var city = cityWithSpace.split(' ').join('&');
     var searchButton = document.getElementById("search");
     searchButton.disabled = true;
     searchButton.innerText = "Please Wait...";
@@ -212,6 +213,8 @@
         console.log(err);
         searchButton.disabled = false;
         searchButton.innerText = "Search";
+        errorHandle(2);
+        return;
       });
   }
 
@@ -225,12 +228,13 @@
     if (data.data.results === null) {
       errorHandle(2);
       return;
-    } else {
-      for (i = 0; i < length; i++) {
+    } else{
+      for(i = 0; i<length; i++) {
         var postalCode = data.data.results[i].location.address.postal_code;
         var state = data.data.results[i].location.address
           .state_code; // need state code (abrev) instead of state non abrev for error checking 
         var city = data.data.results[i].location.address.city;
+        console.log(city);
         var street = data.data.results[i].location.address.line;
         var listingPrice = data.data.results[i].list_price;
         var listingDate = data.data.results[i].list_date;
@@ -242,10 +246,6 @@
         var stateNoAbrev = data.data.results[i].location.address.state;
 
         if (state !== document.getElementById("state").value) {
-          errorHandle(2);
-          return;
-        }
-        if (city !== document.getElementById("city").value) {
           errorHandle(2);
           return;
         }
@@ -287,14 +287,19 @@
           listingAgent: listingAgent,
           stateNoAbrev: stateNoAbrev,
         };
-        // gathering 10 of the results and putting them all into an array
-        searchResultStats.push(JSON.stringify(singleStats));
-
-      }
+          searchResultStats.push(JSON.stringify(singleStats));
+      }// end for loop
       //Functionality to send array data to HTML
       thelisthtml = "";
       document.getElementById("cardsArea").innerHTML = "";
-      thelisthtml += "<h2>" + "Showing results for " + city + ", " + stateNoAbrev + "</h2>";
+
+      var userInputCity = document.getElementById("city").value;
+      if(city.toUpperCase() !== userInputCity.toUpperCase()){
+        thelisthtml += "<h2>" + "We could not find available listings in " + userInputCity + ", " + stateNoAbrev + "</h2>";
+        thelisthtml += "<h4>" + "Showing results for cities nearby" + "</h4><br>";
+      }else{
+        thelisthtml += "<h2>" + "Showing results for " + city + ", " + stateNoAbrev + "</h2>";
+      }
 
       for (i = 0; i < length; i++) {
         thelisthtml += "<div class='col-md-2'>"
