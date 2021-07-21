@@ -20,31 +20,49 @@
   <link rel="icon" type="image/x-icon" href="./favicon.ico" />
   <title>ZeroPads - Home Page</title>
 </head>
+
+<style>
+  /* Navigation Formatting not active */
+  .list:not(.active) {
+    background-color: none;
+    color: black;
+  }
+
+  /* Navigation Formatting active */
+  #active{
+    font-weight: bold !important;
+    border-bottom: 1px solid black;
+    padding-bottom:2px;
+  }
+  #active:hover{
+    border-bottom: 1px solid rgba(57, 181, 74, 1) !important;
+  }
+</style>
+
 <body>
+  <div class="background">
   <!-- Navigation Bar-->
   <div class="container">
     <!-- Header Section-->
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 bg-transparent">
       <a href="index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <img id="logo" src="./images/header_logo.png" width="63" height="32">
         <span class="fs-4">Team ZeroPads Group Assignment</span>
       </a>
-      <nav class="navbar nav-expand-lg navbar-light">
-        <ul class="nav nav-pills">
-          <li class="nav-item pill-1"><a href="./index.html" class="nav-link active" aria-current="page">Home</a></li>
-          <li class="nav-item pill-1"><a href="./mls.html" class="nav-link">Find Housing</a>
+      <nav class="navbar nav-expand-lg bg-transparent">
+        <ul class="nav bg-transparent">
+          <li class="list"><a href="./index.html" class="nav-link" id = "active" aria-current="page">Home</a></li>
+          <li class="list"><a href="./mls.html" class="nav-link">Find Housing</a>
           </li>
         </ul>
       </nav>
-
     </header>
     <!-- End Header -->
   </div>
+  <div class="section"></div>
   <!-- End Header -->
 
-  <!-- Body Section-->
   <div class="body">
-    <!-- Add a background color and large text to the whole page -->
         <h1 class="fw-bold">ZeroPads Group Assignment</h1><br>
           <p>Welcome to our group assignment. We came up with this project with one goal in mind:
            To create a reuseable piece of code to later use in our collaborations with ZeroPads. After
@@ -52,24 +70,18 @@
             listings functionality on the ZeroPads website.
             We created a Real Estate listings application that allows you to search for homes that are
             for sale by <strong>city</strong> and <strong>state.</strong></p><br>
-          <a href="./mls.html"><center><button class="button">Start Your Search</button></a></center>
-          <br><br>
-          <div class="section"></div>
-          <br><br>
-            
-          <h2 class="fw-bold">Technical Know-How</h2><br>
+  
             <p>This project was writtin in HTML/ CSS/ JavaScript. It uses the <strong>US Real
                 Estate</strong> API
               found on Rapid API.
               You can find the api details below</a>
               This project is hosted using <strong>AWS EC2 Instance</strong>.</p><br>
-            <center><a href='https://rapidapi.com/datascraper/api/us-real-estate' target="_blank"><button class="button">API Discovery</button></a></center>
+              <a href="./mls.html"><center><button class="button">Start Your Search</button></a>   
+              <a href='https://rapidapi.com/datascraper/api/us-real-estate' target="_blank"><button class="button">API Discovery</button></a></center>
             <br><br>
-            <div class="section"></div><br><br>
 
-            <h2 class="fw-bold">Team Members</h2><br>
-
-            <table class="table table-bordered table-striped">
+            <h2 class="fw-bold title">Team Members</h2><br>
+            <table class="table table-bordered table-dark table-striped">
               <thead>
                 <tr>
                   <th scope="col">Name</th>
@@ -104,13 +116,14 @@
                 </tr>
               </tbody>
             </table>
-        <div class="container-fluid py-5">
-          <h1 class="display-6 fw-bold">Questions?</h1>
-          <p class="col-md-8 fs-6">Reach out to our team </p>
+            <br>
+        <div class="container-fluid py-4 question">
+          <h1>Questions?</h1>
+          <p>Reach out to our team </p>
         </div>
       </div>
     </div>
-</body>
+</div>
 
     <footer class="bg-light text-center text-white">
       <!-- Grid container -->

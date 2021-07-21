@@ -39,7 +39,7 @@
   <!-- Navigation Bar-->
   <div class="container">
     <!-- Header Section-->
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4">
       <a href="index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <img id="logo" src="./images/header_logo.png" width="63" height="32">
         <span class="fs-4">Team ZeroPads Group Assignment</span>
@@ -54,6 +54,7 @@
     </header>
     <!-- End Header -->
   </div>
+
 
   <!-- Body Section-->
     <div class="background">
@@ -279,10 +280,10 @@
 
       var userInputCity = document.getElementById("city").value;
       if(city.toUpperCase() !== userInputCity.toUpperCase()){
-        thelisthtml += "<h2>" + "There are no available listings in " + userInputCity + ", " + stateNoAbrev + "</h2>";
-        thelisthtml += "<p>" + "Showing results for cities nearby..." + "</p><br>";
+        thelisthtml += "<h2 class='text-center'>" + "There are no available listings in " + userInputCity + ", " + stateNoAbrev + "</h2>";
+        thelisthtml += "<p class='text-center'>" + "Showing results for cities nearby..." + "</p><br>";
       }else{
-        thelisthtml += "<h2>" + "Showing results for " + city + ", " + stateNoAbrev + "</h2>";
+        thelisthtml += "<h2 class='text-center'>" + "Showing results for " + city + ", " + stateNoAbrev + "</h2>";
       }
       
       thelisthtml += "<br><br><div class='container'>"
