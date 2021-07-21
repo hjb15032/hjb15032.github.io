@@ -117,7 +117,22 @@
           <option value="WI">Wisconsin</option>
           <option value="WV">West Virginia</option>
           <option value="WY">Wyoming</option>
-        </select>
+        </select><br><br>
+        
+        <div class="radio" id="radio">
+            <label class="radio-inline">
+              <input id="r0" type="radio" class="radio-bubble" name="optradio" value="" checked>Show All
+            </label>
+            <label class="radio-inline">
+              <input id="r1" type="radio" name="optradio" value="&property_type=single_family">Single Family
+            </label>
+            <label class="radio-inline">
+              <input id="r2" type="radio" name="optradio" value="&property_type=multi_family">Multi Family
+            </label>
+            <label class="radio-inline">
+              <input id="r3" type="radio" name="optradio" value="&property_type=land">Land
+            </label>
+            </div>
         <br /><br><br>
         <button class="button" id="search" value="search" type="button"
           onclick="findHome">Search</button>
@@ -160,6 +175,17 @@
     var state = document.getElementById("state").value;
     var city = cityWithSpace.split(' ').join('&');
     var searchButton = document.getElementById("search");
+    var typeOfHome = document.getElementById("radio").value;
+    var typeValue = "";
+
+    if (document.getElementById('r1').checked) {
+      typeValue = document.getElementById('r1').value;
+    }else if(document.getElementById('r2').checked){
+      typeValue = document.getElementById('r2').value;
+    }else if(document.getElementById('r3').checked){
+      typeValue = document.getElementById('r3').value;
+    }
+
     searchButton.disabled = true;
     searchButton.innerText = "Please Wait...";
     searchButton.style.backgroundColor = "grey";
@@ -170,7 +196,7 @@
     }
 
     const url = 'https://us-real-estate.p.rapidapi.com/for-sale?offset=0&limit=28&state_code=' + state + '&city=' +
-      city + '&sort=newest';
+      city + '&sort=newest' + typeValue;
     console.log(url);
     fetch(url, {
         "method": "GET",
@@ -332,9 +358,9 @@
     searchButton.style.backgroundColor = "rgba(57, 181, 74, 1)";
     document.getElementById("city").value = "";
     document.getElementById("state").value = "";
-
     document.getElementById("cardsArea").innerHTML = " ";
-
+    document.getElementById("r0").checked = true;
+    
     if (err == 1) {
       alert(
         "We're sorry, your results could not be calculated. Please make sure you enter a valid city/state combination."

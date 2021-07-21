@@ -28,10 +28,8 @@ header {
 }
 
 #nav-button:hover{
-  
     text-decoration: none;
     background-color: rgba(57, 181, 74, 1) !important;
-  
 }
 
 .nav-link:hover {
