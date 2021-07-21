@@ -1,15 +1,16 @@
 .card {
-   
     border: 8px solid #e7e9eb;
     color: rgb(63, 62, 62);
     margin-bottom: 2rem;
   }
-
-
   .card-img-top {
     width: 100%;
     height: 15vw;
     object-fit: cover;
+  }
+
+  .cardsArea{
+    margin: auto;
   }
 
   .list-group{
@@ -18,4 +19,85 @@
 
   .bg-light {
     background-color: #e7e9eb !important;
+  }
+
+  .background{
+    width: 100%;
+    background-size: cover;
+    background-image: url("../images/home1.jpg");
+    margin-bottom: 50px;
+  }
+
+  .form{
+    border-radius: 5px;
+    padding: 100px;
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    color: white;
+  }
+
+  input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  select:hover{
+    cursor: pointer;
+  }
+
+  .container{
+    margin: auto;
+    text-align: center;
+  }
+
+  .button{
+    background-color: rgba(57, 181, 74, 1);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+  }
+
+  .button:hover{
+    background-color: grey;
+  }
+
+  .container{
+    margin-bottom: 0px !important;
+  }
+  
+  @media only screen and (max-width: 1232px){
+    .form{
+      width: 70%;
+    }
+  } 
+
+  @media only screen and (max-width: 746px){
+    .form{
+      width: 90%;
+      padding: 40px;
+    }
+  }
+
+  @media only screen and (max-width: 444px){
+    .form{
+      width: 100%;
+      padding: 40px;
+    }
+  }
+
+  @media only screen and (max-width: 375px){
+    .form{
+      padding: 40px;
+    }
   }
