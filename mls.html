@@ -251,6 +251,9 @@
         if (sqFoot === null) {
           sqFoot = "N.A";
         }
+        if (street === null){
+          street = "Street Name Coming Soon"
+        }
 
         var type = data.data.results[i].description.type;
         type = type.replace("_", " ");
