@@ -28,15 +28,15 @@
   margin: 4px 2px;
 }
 
-.list,
+/*.list,
 .nav-link {
   color: black !important;
-}
+} */
 
 .nav-link:hover {
   text-decoration: none;
-  color: rgba(57, 181, 74, 1) !important;
-}
+  color: gray !important;
+} 
 
 .button:hover {
   background-color: grey;

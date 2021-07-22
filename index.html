@@ -36,8 +36,26 @@
     }
 
     #active:hover {
+      border-bottom: 1px solid white !important;
+    }
+
+    
+    #active:hover {
       border-bottom: 1px solid rgba(57, 181, 74, 1) !important;
     }
+
+    /* Navigation Formatting not active */
+    .nav-pills .pill-1 .nav-link:not(.active) {
+      background-color: #fff;
+      color: black;
+    }
+
+    /* Navigation Formatting active (faded) */
+    .nav-pills .pill-1 .nav-link{
+      background-color: rgba(57, 181, 74, 1);
+      color: white;
+    }
+
   </style>
 
   <body>    
@@ -51,8 +69,8 @@
         </a>
         <nav class="navbar nav-expand-lg navbar-light">
           <ul class="nav nav-pills">
-            <li class="nav-item pill-1"><a href="./index.html" class="nav-link">Home</a></li>
-            <li class="nav-item pill-1"><a href="./mls.html" class="nav-link active" aria-current="page">Find Housing</a>
+            <li class="nav-item pill-1"><a href="./index.html" class="nav-link active" aria-current="page">Home</a></li>
+            <li class="nav-item pill-1"><a href="./mls.html" class="nav-link">Find Housing</a>
             </li>
           </ul>
         </nav>
@@ -83,8 +101,8 @@
         <p>This project was writtin in HTML/ CSS/ JavaScript and it uses the 
           <a href="https://rapidapi.com/datascraper/api/us-real-estate/"><strong>US Real
             Estate</strong> API 
-          </a> found on Rapid API <br />
-          You can find the api details below.<br />
+          </a> found on Rapid API. <br />
+          You can find the API details below.<br />
           This project is hosted using <strong>Github Pages</strong>.
         </p><br />
         
