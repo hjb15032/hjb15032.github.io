@@ -1,46 +1,53 @@
-.body{
-    margin-top: 5%;
-    margin-left: 12%;
-    margin-right: 12%;
-    margin-bottom: 10px;
-  }
+.body {
+  margin-top: 5%;
+  margin-left: 12%;
+  margin-right: 12%;
+  margin-bottom: 10px;
+}
 
-  .background{
-    width: 100%;
-    background-size: cover;
-    background-image: url("../images/city4.jpeg");
-  }
+.background {
+  width: 100%;
+  background-size: cover;
+  background-image: url("../images/city4.jpeg");
+}
 
-  .section{
-    border-bottom: .5px solid grey;
-  }
+.section {
+  border-bottom: .5px solid grey;
+}
 
-  .button{
-    background-color: rgba(57, 181, 74, 1);
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-  }
+.button {
+  background-color: rgba(57, 181, 74, 1);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+}
 
-.list, .nav-link{
-    color: black !important;
+.list,
+.nav-link {
+  color: black !important;
 }
 
 .nav-link:hover {
-    text-decoration: none;
-    color: rgba(57, 181, 74, 1) !important;
+  text-decoration: none;
+  color: rgba(57, 181, 74, 1) !important;
 }
-  .button:hover{
-    background-color: grey;
-  }
 
-  @media only screen and (max-width: 1429px){
-    .question{  
-        background-color: rgb(220,220,220, .6);
-    }
-  } 
+.button:hover {
+  background-color: grey;
+}
+
+@media only screen and (max-width: 1429px) {
+  .question {
+    background-color: rgb(220, 220, 220, .6);
+  }
+}
+
+.table {
+  background-color: rgb(207, 212, 208);
+  opacity: 0.7;
+}
