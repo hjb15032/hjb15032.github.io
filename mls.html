@@ -87,9 +87,7 @@
           <div class="advance-search-align">
             <button type="button" class="advance-search-button" onclick="showAdvanced()"><p id="advanced-search">Advanced Search</p><i id="advanced-icon" class="bi bi-caret-down-fill" style="display: inline; padding-left: 10px; font-size: 14px;"></button></i>
           </div>
-
           <div id="advance-search-options" style="display: none">
-            
             <div class="row justify-content-center g-3">
               <div class="col-md-4">
                 <label for="bedrooms" style="margin-bottom: 15px; margin-top: 10px;">Bedrooms</label>
@@ -325,8 +323,10 @@
       var bedrooms = document.getElementById("bedrooms").value = "";
       var baths = document.getElementById("baths").value = "";
       var price = document.getElementById("price").value = "";
-      icon.classList.remove('bi-caret-up-fill');
-      icon.classList.add('bi-caret-down-fill');
+      var i = document.getElementById("advanced-icon");
+      i.classList.remove('bi-caret-up-fill');
+      i.classList.add('bi-caret-down-fill');
+      var x = document.getElementById("advance-search-options");
       x.style.display = "none";
       
       if (err == 1) {
