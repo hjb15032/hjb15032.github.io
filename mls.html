@@ -26,7 +26,7 @@
         <h4>Let’s find a home that’s perfect for you</h4><br />
         <form>
           <fieldset class="form-group col-sm">
-            <input type="text" placeholder="City" aria-label="Search" id="city" style="margin-right: 10px;">
+            <input type="text" placeholder="City" aria-label="Search" id="city" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" style="margin-right: 10px;">
             <select id="state" data-dropup-auto="false">
               <option value="">Choose a State</option>
               <option value="AK">Alaska</option>
@@ -93,11 +93,11 @@
             <div class="row justify-content-center g-3">
               <div class="col-md-4">
                 <label for="bedrooms" style="margin-bottom: 15px; margin-top: 10px;">Bedrooms</label>
-                  <input type="number" class="form-control" id="bedrooms" name="bedrooms" min="1" max="4">
+                  <input type="number" class="form-control" id="bedrooms" name="bedrooms" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" min="1" max="4">
               </div>
               <div class="col-md-4">
                 <label for="baths" style="margin-bottom: 15px; margin-top: 10px;">Bathrooms</label>
-                  <input type="number" class="form-control" id="baths" name="baths" min="1" max="4">
+                  <input type="number" class="form-control" id="baths" name="baths" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" min="1" max="4">
               </div>
             </div>
            <br>
@@ -107,19 +107,15 @@
               <option value="asc">Price: Low to High</option>
               <option value="desc">Price: High to Low</option>
             </select> 
-         <!--- <span class="currencyinput">$</span>
-          <input type="text" placeholder="Price" aria-label="Search" id="price" style="margin-right: 10px;">--->
            <br />   
           </div> <br /> 
           <button class="button" id="search" value="search" type="button"
             onclick="findHome">Find Your Home
-          </button>
+        </button>
         </form>
       </div>
   </div>
 </div>
-
-    <!--</div> -->
     <div class="container">
       <div class="row">
         <div id="cardsArea"></div>
@@ -128,6 +124,10 @@
   </body>
 </html>
   <script type="text/javascript">
+
+  window.onload = function() {
+    findHome();
+  };
     document.getElementById("search").addEventListener("click", findHome);
   
 
@@ -154,13 +154,14 @@
 
       var cityWithSpace = document.getElementById("city").value;
       var state = document.getElementById("state").value;
-      var city = cityWithSpace.split(' ').join('&');
+      var citySplit = cityWithSpace.split(' ').join('&');
+      citySplit = citySplit.toLowerCase();
+      var city = citySplit.charAt(0).toUpperCase() + citySplit.slice(1);
       var searchButton = document.getElementById("search");
       var bedrooms = document.getElementById("bedrooms").value;
       var baths = document.getElementById("baths").value;
       var price = document.getElementById("price").value;
 
-      ///&sort[0][field]=Price&sort[0][direction]=desc
       if(baths !== "" && bedrooms !== "" && price !== ""){ // price, bed, bath
         apiUrl = 'https://api.airtable.com/v0/apppFK3jcYmpupxXT/Listings?filterByFormula=AND({State}="' + state + '",{City}="' + city + 
         '",{Bedrooms}="' + bedrooms + '",{Baths}="' + baths +'")&sort[0][field]=Price&sort[0][direction]=' + price;
@@ -203,7 +204,7 @@
         .then(function (response) {
           if (response.status !== 200) {
             searchButton.disabled = false;
-            searchButton.innerText = "Search";
+            searchButton.innerText = "Find Your Home";
             // error check
           }
           return response.json();
@@ -211,13 +212,13 @@
           parseData(data);
         }).then(function () {
           searchButton.disabled = false;
-          searchButton.innerText = "Search";
+          searchButton.innerText = "Find Your Home";
           searchButton.style.backgroundColor = "rgba(57, 181, 74, 1)";
         })
         .catch(err => {
           console.log(err);
           searchButton.disabled = false;
-          searchButton.innerText = "Search";
+          searchButton.innerText = "Find Your Home";
           searchButton.style.backgroundColor = "rgba(57, 181, 74, 1)";
           // error check
           return;
@@ -281,14 +282,13 @@
       thelisthtml += "<h2 class='text-center'>" + "Showing all listings.</h2>";
     }
 
-    
     thelisthtml += "<br><br><div class='container'>"
     thelisthtml += "<div class='row'>"
     for (i = 0; i < length; i++) {
       thelisthtml += "<div class='col-sm'>"
-      thelisthtml += "<div class='card bg-light' style='width: 35rem;'>"
+      thelisthtml += "<div class='card bg-light' style='width: 25rem;'>"
       thelisthtml += "<img src=" + JSON.parse(searchResultStats[i]).coverPhoto +
-      " class='card - img - top img-rounded' style='height: 350px' alt='photo of listing'>"
+      " class='card - img - top img-rounded' style='height: 250px' alt='photo of listing'>"
       thelisthtml += " <div class='card-body'>";
       thelisthtml += "<h5 class='card-title'>" + "Listing Price: <strong style='color:rgba(57, 181, 74, 1)'>$" + (JSON
           .parse(searchResultStats[i]).price).toLocaleString() +
@@ -305,7 +305,7 @@
         JSON.parse(searchResultStats[i]).status + "</li>"
       thelisthtml += "<li class='list-group-item'>" + "Lot Size: " +
         JSON.parse(searchResultStats[i]).lot + "</li></ul>"
-      thelisthtml += "<li class='list-group-item'>" + "Description: " +
+      thelisthtml += "<li class='list-group-item'>" +
         JSON.parse(searchResultStats[i]).description + "</li></ul>"
       thelisthtml += " <div class='card-body' style='background-color: rgba(57, 181, 74, 1)'>";
       thelisthtml += "<p class='card-text' style='color: white'>ZeroPads Development Group</p></div>"
@@ -313,7 +313,6 @@
       document.getElementById("cardsArea").innerHTML = thelisthtml;
     }
   }
-
 
     function errorHandle(err) {
       var searchButton = document.getElementById("search");
@@ -323,8 +322,13 @@
       document.getElementById("city").value = "";
       document.getElementById("state").value = "";
       document.getElementById("cardsArea").innerHTML = " ";
-
-
+      var bedrooms = document.getElementById("bedrooms").value = "";
+      var baths = document.getElementById("baths").value = "";
+      var price = document.getElementById("price").value = "";
+      icon.classList.remove('bi-caret-up-fill');
+      icon.classList.add('bi-caret-down-fill');
+      x.style.display = "none";
+      
       if (err == 1) {
         alert(
           "We're sorry, your results could not be calculated. Please make sure you enter a valid city/state combination."
@@ -335,13 +339,11 @@
           "We're sorry, your results could not be calculated. Please make sure you enter a valid city/state combination. In some cases, we may not have any homes available in the city/state/type of home you provided"
         )
       }
-
       if(err == 3){
         alert(
           "We're sorry, but no results were found to match your criteria. Please edit your filter and try again."
         )
       }
     }
-    
   </script>
 </html>
