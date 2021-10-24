@@ -17,6 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
     <link href="./CSS/mls.css" rel="stylesheet">
+    
   </head>
 
   <body>
@@ -24,6 +25,9 @@
     <div class="background">
       <div class="form">
         <h4>Let’s find a home that’s perfect for you</h4><br />
+        <div class="container">
+            <div id="photosArea"></div>
+          </div>
         <form>
           <fieldset class="form-group col-sm">
             <input type="text" placeholder="City" aria-label="Search" id="city" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" style="margin-right: 10px;">
@@ -119,6 +123,8 @@
         <div id="cardsArea"></div>
       </div>
     </div>
+  
+    </div>
   </body>
 </html>
   <script type="text/javascript">
@@ -127,7 +133,6 @@
     findHome();
   };
     document.getElementById("search").addEventListener("click", findHome);
-  
 
     function showAdvanced() {
       var x = document.getElementById("advance-search-options");
@@ -137,8 +142,7 @@
       if(x.style.display === "none"){
         icon.classList.remove('bi-caret-down-fill');
         icon.classList.add('bi-caret-up-fill');
-        x.style.display = "inline";
-        
+        x.style.display = "inline";   
       }else{
         icon.classList.remove('bi-caret-up-fill');
         icon.classList.add('bi-caret-down-fill');
@@ -147,9 +151,7 @@
     }
 
     function findHome(e) {
-
       var apiUrl = 'https://api.airtable.com/v0/apppFK3jcYmpupxXT/Listings?filterByFormula=AND({State}="' + state + '",{City}="' + city + '")';
-
       var cityWithSpace = document.getElementById("city").value;
       var state = document.getElementById("state").value;
       var citySplit = cityWithSpace.split(' ').join('&');
@@ -203,7 +205,7 @@
           if (response.status !== 200) {
             searchButton.disabled = false;
             searchButton.innerText = "Find Your Home";
-            // error check
+            errorHandle(3);
           }
           return response.json();
         }).then(function (data) {
@@ -218,17 +220,36 @@
           searchButton.disabled = false;
           searchButton.innerText = "Find Your Home";
           searchButton.style.backgroundColor = "rgba(57, 181, 74, 1)";
-          // error check
           return;
         });
     }
+    function onImageButtonClick(clicked_id, searchResultStats) {
 
+      photos = "<div class='modal' tabindex='-1' role='dialog' id='myModal'><div class='modal-dialog' role='document'>";
+      photos += "<div class='modal-content'><div class='modal-header'><button type='button' style='border:none; background:none; font-size: 25px !important;' data-dismiss='modal' aria-label='Close'><span aria-hidden='false'>&times;</span></button>";
+      photos += "</div><div class='modal-body'>";
+      photos += "<div id='carousel-example-generic' class='carousel slide' data-ride='carousel'><div class='carousel-inner'>";
+
+      for(j = 0; j < JSON.parse(searchResultStats[clicked_id]).coverPhoto.length; j++){
+        if (j === 0) {
+          photos += "<div class='carousel-item active'><img class='d-block w-100' src='" +  JSON.parse(searchResultStats[clicked_id]).coverPhoto[j] + "' alt='Photo'></div>";
+        } else {
+          photos += "<div class='carousel-item'><img class='d-block w-100' src='" +  JSON.parse(searchResultStats[clicked_id]).coverPhoto[j] + "' alt='Photo'></div>";
+        }
+      }
+      photos += "<a class='carousel-control-prev' href='#carousel-example-generic' role='button' data-slide='prev'>";
+      photos += "<span class='carousel-control-prev-icon' aria-hidden='true'></span></a>";
+      photos += "<a class='carousel-control-next' href='#carousel-example-generic' role='button' data-slide='next'>";
+      photos += "<span class='carousel-control-next-icon' aria-hidden='true'></span></a>";
+      
+      photos += "</div></div></div></div>";
+
+      document.getElementById("photosArea").innerHTML = photos;
+    }
   function parseData(data) {
     var object = data.records;
     var length = object.length;
     var searchResultStats = [];
-    var photosArray = [];
-    var individualPhotos = [];
 
     if (length === 0) {
       errorHandle(3);
@@ -247,7 +268,11 @@
       var price = object[i].fields.Price;
       var lot = object[i].fields.Lotsize;
       var description = object[i].fields.Notes;
-      var coverPhoto = object[i].fields.Pictures[0].url;
+      var coverPhoto = [];
+
+      for(j = 0; j < object[i].fields.Pictures.length; j++){
+        coverPhoto.push(object[i].fields.Pictures[j].url);
+      }
 
       var singleStats = {
         zip: zip,
@@ -262,8 +287,7 @@
         coverPhoto: coverPhoto,
       };
         searchResultStats.push(JSON.stringify(singleStats));
-    }// end for loop
-    //Functionality to send array data to HTML
+    }
     thelisthtml = "";
     document.getElementById("cardsArea").innerHTML = "";
 
@@ -282,36 +306,32 @@
 
     thelisthtml += "<br><br><div class='container'>"
     thelisthtml += "<div class='row'>"
+
+    photos = "";
+    document.getElementById("photosArea").innerHTML = "";
+
     for (i = 0; i < length; i++) {
       thelisthtml += "<div class='col-sm'>"
       thelisthtml += "<div class='card bg-light' style='width: 25rem;'>"
-      thelisthtml += "<img src=" + JSON.parse(searchResultStats[i]).coverPhoto +
-      " class='card - img - top img-rounded' style='height: 220px' alt='photo of listing'>"
+      thelisthtml += "<img src=" + JSON.parse(searchResultStats[i]).coverPhoto[0] +" class='card - img - top img-rounded' style='height: 220px' alt='photo of listing'>"
       thelisthtml += " <div class='card-body'>";
-      thelisthtml += "<h5 class='card-title'>" + "Listing Price: <strong style='color:rgba(57, 181, 74, 1)'>$" + (JSON
-          .parse(searchResultStats[i]).price).toLocaleString() +
-        "</strong></h5>";
-      thelisthtml += "<p class='card-text'>" + JSON.parse(searchResultStats[i]).address + "</p></div>" //end of card body
+      thelisthtml += `<button type='button' class='modal-button' data-toggle='modal' data-target='#myModal' onClick='onImageButtonClick(${i}, ${JSON.stringify(searchResultStats)})'>See More Photos</button>`;
+      thelisthtml += "<h5 class='card-title'>" + "Listing Price: <strong style='color:rgba(57, 181, 74, 1)'>$" + (JSON.parse(searchResultStats[i]).price).toLocaleString() +"</strong></h5>";
+      thelisthtml += "<p class='card-text'>" + JSON.parse(searchResultStats[i]).address + "</p></div>"
       thelisthtml += "<ul class='list-group list-group-flush'>"
-      thelisthtml += "<li class='list-group-item'>" + "Number of Beds: " + JSON.parse(searchResultStats[i]).bedrooms +
-        "</li>"
-      thelisthtml += "<li class='list-group-item'>" + "Number of Baths: " + JSON.parse(searchResultStats[i]).baths +
-        "</li>"
-      thelisthtml += "<li class='list-group-item'>" + "Square Feet: " +
-        JSON.parse(searchResultStats[i]).sqft + "</li>"
-      thelisthtml += "<li class='list-group-item'>" + "Status: " +
-        JSON.parse(searchResultStats[i]).status + "</li>"
-      thelisthtml += "<li class='list-group-item'>" + "Lot Size: " +
-        JSON.parse(searchResultStats[i]).lot + "</li></ul>"
-      thelisthtml += "<li class='list-group-item'>" +
-        JSON.parse(searchResultStats[i]).description + "</li></ul>"
+      thelisthtml += "<li class='list-group-item'>" + "Number of Beds: " + JSON.parse(searchResultStats[i]).bedrooms +"</li>"
+      thelisthtml += "<li class='list-group-item'>" + "Number of Baths: " + JSON.parse(searchResultStats[i]).baths +"</li>"
+      thelisthtml += "<li class='list-group-item'>" + "Square Feet: " + JSON.parse(searchResultStats[i]).sqft + "</li>"
+      thelisthtml += "<li class='list-group-item'>" + "Status: " + JSON.parse(searchResultStats[i]).status + "</li>"
+      thelisthtml += "<li class='list-group-item'>" + "Lot Size: " + JSON.parse(searchResultStats[i]).lot + "</li></ul>"
+      thelisthtml += "<li class='list-group-item'>" +JSON.parse(searchResultStats[i]).description + "</li></ul>"
       thelisthtml += " <div class='card-body' style='background-color: rgba(57, 181, 74, 1)'>";
       thelisthtml += "<p class='card-text' style='color: white'>ZeroPads Development Group</p></div>"
       thelisthtml+= "</div></div>";
+      
       document.getElementById("cardsArea").innerHTML = thelisthtml;
     }
   }
-
     function errorHandle(err) {
       var searchButton = document.getElementById("search");
       searchButton.disabled = false;
