@@ -6,11 +6,6 @@
     margin: auto;
     margin-top: 20px;
   }
-  .card-img-top {
-    width: 100%;
-    height: 15vw;
-    object-fit: cover;
-  }
 
   .advance-search-align{
     text-align: center;
@@ -149,7 +144,7 @@
     .modal-dialog {
       max-width: 800px; /* New width for default modal */
     }
-  
+  }
   @media only screen and (max-width: 1383px){
     .background{
       width: 80%;
@@ -166,6 +161,31 @@
 
     .form{
       padding: 20px;
+      padding-bottom: unset;
+      margin: auto;
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  @media only screen and (max-width: 673px){
+    .background{
+      width: 90% !important;
+      margin: auto;
+      margin-top: 50px;
+      padding-bottom: 100px;
+      margin-bottom: 70px;
+    }
+
+    .card {
+      width: 20rem !important;
+    }
+
+    .cardimg {
+      width: 100% !important;
+    }
+
+    .form{
       padding-bottom: unset;
       margin: auto;
       width: 100%;
