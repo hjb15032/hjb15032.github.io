@@ -314,9 +314,9 @@
     document.getElementById("photosArea").innerHTML = "";
 
     for (i = 0; i < length; i++) {
-      thelisthtml += "<div class='col-sm'>"
+      thelisthtml += "<div class='col-md'>"
       thelisthtml += "<div class='card bg-light' style='width: 25rem;'>"
-      thelisthtml += "<img src=" + JSON.parse(searchResultStats[i]).coverPhoto[0] +" class='card - img - top img-rounded' style='height: 220px' alt='photo of listing'>"
+      thelisthtml += "<img src=" + JSON.parse(searchResultStats[i]).coverPhoto[0] +" class='cardimg card - img - top img-rounded' style='height: 220px' alt='photo of listing'>"
       thelisthtml += " <div class='card-body'>";
       
       if((JSON.parse(searchResultStats[i]).coverPhoto.length) > 1){
