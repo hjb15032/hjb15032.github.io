@@ -58,13 +58,15 @@
     justify-content: center;
   }
 
-  input[type=text], select {
+  select {
     padding: 12px 20px;
     margin: 8px 0;
+    width: 40%;
     border: 1px solid black;
     border-radius: 4px;
     box-sizing: border-box;
   }
+
 
   input[type=number]{
     border: 1px solid black;
