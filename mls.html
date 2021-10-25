@@ -240,9 +240,16 @@
     document.getElementById("cardsArea").innerHTML = "";
 
     var inputState = document.getElementById("state").value;
+    var stateNoAb = "";
+
+    if(inputState === "GA"){
+      stateNoAb = "Georgia";
+    }else if(inputState === "AR"){
+      stateNoAb = "Arkansas";
+    }
 
     if(inputState !== ""){
-      thelisthtml += "<h2 class='text-center'>" + "Showing results in " + state + "</h2>";
+      thelisthtml += "<h2 class='text-center'>" + "Showing results in " + stateNoAb + ".</h2>";
     }else{
       thelisthtml += "<h2 class='text-center'>" + "Showing all listings.</h2>";
     }
